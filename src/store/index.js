@@ -4,6 +4,18 @@ import { fetchItems, fetchIdsByType, fetchUser } from './api'
 
 Vue.use(Vuex)
 
+//插件例子
+const myPlugin = store => {
+  // 当 store 初始化后调用
+  store.subscribe(mutation => {
+    // 每次 mutation 之后调用
+    // mutation 的格式为 { type, payload }
+    if (mutation.type === 'ADD_TODO') {
+        store.commit('IS_MUTATION')
+    }
+  })
+}
+
 const store = new Vuex.Store({
   state: {
     activeType: null,
@@ -24,7 +36,8 @@ const store = new Vuex.Store({
       {id: 1481461997125, name: "吴绍彬", position: 'web前端', isfilter: false},
       {id: 1481462003982, name: "陈浩川", position: 'ios工程师', isfilter: true},
       {id: 1481462005138, name: "林建详", position: 'ios工程师', isfilter: false}
-    ]
+    ],
+    ismutation: false
   },
 
   actions: {
@@ -101,7 +114,8 @@ const store = new Vuex.Store({
     COUNT_DECREAMENT_10: (state, payload) => { state.count -= payload.acount },
     ADD_TODO: (state, item) => {
         state.todos.push(item)
-    }
+    },
+    IS_MUTATION: state => { state.ismutation = true  } 
   },
 
   getters: {
@@ -133,7 +147,9 @@ const store = new Vuex.Store({
       return getters.filterTodo.length
     }
 
-  }
+  },
+
+  plugins: [myPlugin]
 })
 
 export default store

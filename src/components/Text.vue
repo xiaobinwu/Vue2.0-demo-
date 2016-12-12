@@ -54,6 +54,18 @@
 				</li>
 			</ul>
 		</div>
+
+		<h4>Demo5 - 插件</h4>
+		<div class="demo5">
+			<p v-if="ismutation">
+				调用了ADD_TODO - Mutation， 我就是通过插件选项设置成true
+			</p>
+			<p v-else>
+				没有调用ADD_TODO - Mutation，我是通过插件选项设置成false
+			</p>
+		</div>
+
+
 	</div>
 </template>
 
@@ -94,6 +106,10 @@
 			//router + vuex
 			routeArr(){
 				return this.$store.state.route;
+			},
+			//plugin
+			ismutation(){
+				return this.$store.state.ismutation
 			}
 		},
 		methods: {
@@ -104,7 +120,7 @@
 					isfilter: this.isfilter
 				};
 				this.$store.dispatch('ADD_TODO_ASYNC', item).then((id) =>{
-					console.log(id)
+					console.log('我的id是' + id)
 					this.name = ''
 					this.position = ''
 					this.isfilter = false
