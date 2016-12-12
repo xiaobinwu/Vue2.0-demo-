@@ -9,7 +9,7 @@ const config = Object.assign({}, base, {
     }
   },
   plugins: (base.plugins || []).concat([
-    // strip comments in Vue code
+    // strip comments in Vue code 定义环境变量
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
@@ -19,6 +19,7 @@ const config = Object.assign({}, base, {
 if (process.env.NODE_ENV === 'production') {
   // Use ExtractTextPlugin to extract CSS into a single file
   // so it's applied on initial render
+  //额外打包css
   const ExtractTextPlugin = require('extract-text-webpack-plugin')
   const SWPrecachePlugin = require('sw-precache-webpack-plugin')
 

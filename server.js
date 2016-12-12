@@ -40,15 +40,18 @@ if (isProd) {
 
 function createRenderer (bundle) {
   return createBundleRenderer(bundle, {
+    //lru-cache用于缓存组件    
     cache: require('lru-cache')({
       max: 1000,
       maxAge: 1000 * 60 * 15
     })
   })
 }
-
+//压缩响应体
 app.use(compression({threshold: 0}))
+//配置静态目录
 app.use('/dist', express.static(resolve('./dist')))
+//配置favicon
 app.use(favicon(resolve('./src/assets/logo.png')))
 
 app.get('*', (req, res) => {
@@ -68,6 +71,7 @@ app.get('*', (req, res) => {
 
   renderStream.on('end', () => {
     // embed initial store state
+    //JSON.stringify不能压缩regexp与function,所以需要使用serialize-javascript    
     if (context.initialState) {
       res.write(
         `<script>window.__INITIAL_STATE__=${
@@ -89,5 +93,6 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {
+  //es6 文本模板  
   console.log(`server started at localhost:${port}`)
 })

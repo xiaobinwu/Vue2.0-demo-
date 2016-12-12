@@ -1,3 +1,4 @@
+// 分块加载机制现在是依赖于 Promise 的。这表示你需要在旧版浏览器下提供一个 Promise 的 polyfill,以防ie浏览器
 require('es6-promise').polyfill()
 import { app, store } from './app'
 

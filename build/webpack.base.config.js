@@ -22,6 +22,7 @@ module.exports = {
         loader: 'buble-loader',
         exclude: /node_modules/,
         options: {
+          //profill垫片
           objectAssign: 'Object.assign'
         }
       },

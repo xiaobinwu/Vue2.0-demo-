@@ -63,7 +63,7 @@ const store = new Vuex.Store({
     ADD_TODO_ASYNC: ({commit}, item) => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          item.id = (new Date()).getTime() + Math.round(Math.random()*1000)
+          item.id = +new Date() + Math.round(Math.random()*1000)
           commit('ADD_TODO', item)
           resolve(item.id)
         }, 1000)
