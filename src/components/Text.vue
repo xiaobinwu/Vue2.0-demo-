@@ -45,8 +45,15 @@
 			</p>
 			<button @click="addTodo">添加</button>
 		</div>
-
-
+		<h4>Demo4 - 集成vue-router与vuex，管理动态模块的路由状态 <a href="https://www.npmjs.com/package/vuex-router-sync" target="_blank">详见</a></h4>
+		<div class="demo4">
+			<p>路由route对象集</p>
+			<ul>
+				<li v-for="(val, key) in routeArr">
+					{{key}} - {{val}}
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -83,6 +90,10 @@
 			},
 			filtertodoslength(){
 				return this.$store.getters.filteredTodoLength
+			},
+			//router + vuex
+			routeArr(){
+				return this.$store.state.route;
 			}
 		},
 		methods: {
