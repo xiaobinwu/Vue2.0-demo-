@@ -4,6 +4,9 @@ import { fetchItems, fetchIdsByType, fetchUser } from './api'
 
 Vue.use(Vuex)
 
+//热重载 [http://vuex.vuejs.org/zh-cn/hot-reload.html]
+
+
 //插件例子
 const myPlugin = store => {
   // 当 store 初始化后调用
@@ -149,7 +152,9 @@ const store = new Vuex.Store({
 
   },
 
-  plugins: [myPlugin]
+  plugins: [myPlugin],
+  //无论何时发生了状态变更且不是由 mutation 函数引起的，将会抛出错误
+  strict: process.env.NODE_ENV !== 'production'
 })
 
 export default store
